@@ -267,14 +267,14 @@ export default function PendingReviewsTab() {
                           <button
                             onClick={() => approveOne(r._id)}
                             disabled={busyId !== null}
-                            className="px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 text-xs sm:text-sm transition"
+                            className="px-2 py-1 rounded bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 text-xs sm:text-sm transition cursor-pointer"
                           >
                             Approve
                           </button>
                           <button
                             onClick={() => deleteOne(r._id)}
                             disabled={busyId !== null}
-                            className="px-2 py-1 rounded bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 text-xs sm:text-sm transition"
+                            className="px-2 py-1 rounded bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 text-xs sm:text-sm transition cursor-pointer"
                           >
                             Delete
                           </button>

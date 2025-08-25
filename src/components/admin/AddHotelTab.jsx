@@ -81,6 +81,8 @@ const AddHotelTab = ({ onHotelAdded }) => {
     }
   };
 
+  if(loading) return <p className="text-gray-500">Loading...</p>
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
       <h2 className="text-2xl font-semibold mb-2 text-teal-700">
@@ -221,7 +223,7 @@ const AddHotelTab = ({ onHotelAdded }) => {
       <button
         type="submit"
         disabled={loading}
-        className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition disabled:bg-gray-400"
+        className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition disabled:bg-gray-400 cursor-pointer"
       >
         {loading ? "Adding…" : "Add Hotel"}
       </button>

@@ -88,11 +88,19 @@ export default function OffersList({
   };
 
   if (loading) return <Spinner />;
-  if (!offers.length) return <p className="text-gray-500">No offers found.</p>;
+  if (!offers.length) {
+    return (
+      <div className="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">
+        <p className="font-medium">No offers yet 🎉</p>
+        <p className="text-sm">Use the form above to add your first offer.</p>
+      </div>
+    );
+  }
+
   if (!hotelId) {
     return (
       <p className="text-red-600">
-        Please enter a valid Hotel ID to manage offers.
+        ⚠️Please enter a Hotel ID to manage offers.
       </p>
     );
   }
@@ -106,13 +114,12 @@ export default function OffersList({
         return (
           <div
             key={o._id}
-            className="border p-4 rounded bg-white shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center"
+            className="border-2 border-gray-300 p-4 rounded bg-white shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center"
           >
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-[#0D9488]">{o.code}</h3>
               <p className="text-sm text-gray-700">
-                {o.discountPercent}% off · Min ₹{o.minBookingAmount} · Max{" "}
-                {o.maxRedemptions || "∞"} uses
+                {o.discountPercent}% off · Max {o.maxRedemptions || "∞"} uses
               </p>
               <p className="text-xs text-gray-500 mt-1">
                 Valid:{" "}
@@ -152,7 +159,7 @@ export default function OffersList({
             <div className="mt-3 sm:mt-0 flex flex-wrap gap-2">
               <button
                 onClick={() => setEditOffer(o)}
-                className="px-3 py-1 rounded bg-[#0D9488] text-white text-sm hover:bg-[#0f766e]"
+                className="px-3 py-1 rounded bg-[#0D9488] text-white text-sm hover:bg-[#0f766e] cursor-pointer"
               >
                 Edit
               </button>
@@ -160,7 +167,7 @@ export default function OffersList({
                 <button
                   onClick={() => deactivateOffer(o._id)}
                   disabled={busyId === o._id}
-                  className="px-3 py-1 rounded bg-amber-500 text-white text-sm hover:bg-amber-600 disabled:opacity-50"
+                  className="px-3 py-1 rounded bg-amber-500 text-white text-sm cursor-pointer hover:bg-amber-600 disabled:opacity-50"
                 >
                   Deactivate
                 </button>
@@ -168,7 +175,7 @@ export default function OffersList({
               <button
                 onClick={() => deleteOffer(o._id)}
                 disabled={busyId === o._id}
-                className="px-3 py-1 rounded bg-rose-500 text-white text-sm hover:bg-rose-600 disabled:opacity-50"
+                className="px-3 py-1 rounded bg-rose-500 text-white text-sm cursor-pointer hover:bg-rose-600 disabled:opacity-50"
               >
                 Delete
               </button>
@@ -179,16 +186,24 @@ export default function OffersList({
 
       {/* Edit Offer Modal */}
       {editOffer && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md space-y-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4
+               bg-black/40 pointer-events-auto overflow-x-auto"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Trap clicks in panel */}
+          <div
+            className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md space-y-2 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2 className="text-xl font-semibold text-[#0D9488]">Edit Offer</h2>
 
-            {/* Form Fields */}
+            {/* Fields — same set as Create */}
             {[
               "code",
               "description",
               "discountPercent",
-              "minBookingAmount",
               "maxRedemptions",
               "validFrom",
               "validTo",
@@ -212,20 +227,23 @@ export default function OffersList({
                       field.includes("Amount") ||
                       field.includes("Redemptions")
                         ? "number"
-                        : field.includes("valid")
+                        : field.toLowerCase().includes("valid")
                         ? "date"
                         : "text"
                     }
                     value={
-                      field.includes("valid") && editOffer[field]
+                      field.toLowerCase().includes("valid") && editOffer[field]
                         ? new Date(editOffer[field]).toISOString().split("T")[0]
-                        : editOffer[field] || ""
+                        : editOffer[field] ?? ""
                     }
                     onChange={(e) => {
+                      const raw = e.target.value;
                       const val =
-                        field.includes("Percent") || field.includes("Amount")
-                          ? Number(e.target.value)
-                          : e.target.value;
+                        field.includes("Percent") ||
+                        field.includes("Amount") ||
+                        field.includes("Redemptions")
+                          ? Number(raw)
+                          : raw;
                       setEditOffer({ ...editOffer, [field]: val });
                     }}
                     className="border p-2 w-full rounded mt-1"
@@ -234,18 +252,18 @@ export default function OffersList({
               </label>
             ))}
 
-            {/* Modal Actions */}
-            <div className="flex justify-end space-x-2">
+            {/* Actions */}
+            <div className="flex justify-end gap-2">
               <button
                 onClick={() => setEditOffer(null)}
-                className="px-3 py-1 rounded bg-gray-300 text-gray-800"
+                className="px-3 py-1 rounded bg-gray-300 text-gray-800 cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={saveEdit}
                 disabled={busyId === editOffer._id}
-                className="px-3 py-1 rounded bg-[#0D9488] text-white hover:bg-[#0f766e] disabled:opacity-50 transition"
+                className="px-3 py-1 rounded bg-[#0D9488] text-white hover:bg-[#0f766e] cursor-pointer disabled:opacity-50 transition"
               >
                 Save
               </button>

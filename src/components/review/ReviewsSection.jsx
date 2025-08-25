@@ -48,7 +48,6 @@ const ReviewsSection = ({
       });
       setReviews(Array.isArray(data) ? data : []);
       setPage(1);
-      onRatingChanged?.(); // refresh rating after load
     } catch {
       toast.error("Failed to load reviews");
     } finally {
@@ -72,8 +71,13 @@ const ReviewsSection = ({
       });
       setMyReview(mine || null);
     } catch {
-      setEligible(false);
-      setMyReview(null);
+      if (err?.response?.status === 401 || err?.response?.status === 403) {
+       setEligible(false);
+       setMyReview(null);
+     } else {
+       setEligible(false);
+       setMyReview(null);
+     }
     }
   };
 
@@ -108,6 +112,7 @@ const ReviewsSection = ({
     setMyReview(saved);
     setEditingReview(null);
     await loadPublic();
+    onRatingChanged?.(); 
     toast.success(
       saved?.isApproved
         ? "Review published"
@@ -131,6 +136,7 @@ const ReviewsSection = ({
       if (myReview?._id === review._id) setMyReview(null);
       await loadPublic();
       await loadMine();
+      onRatingChanged?.(); // ✅ refresh rating after a change
     } catch {
       toast.error("Failed to delete review");
     }
@@ -179,7 +185,7 @@ const ReviewsSection = ({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 text-sm text-gray-600 focus:ring-[#0D9488]"
+            className="border border-gray-300 rounded px-2 py-1 text-sm text-gray-600 focus:ring-[#0D9488] cursor-pointer"
           >
             <option value="newest">Newest</option>
             <option value="highest">Highest Rated</option>
@@ -190,7 +196,7 @@ const ReviewsSection = ({
               type="checkbox"
               checked={verifiedOnly}
               onChange={(e) => setVerifiedOnly(e.target.checked)}
-              className="accent-[#0D9488]"
+              className="accent-[#0D9488] cursor-pointer"
             />
             Verified only
           </label>
@@ -255,7 +261,7 @@ const ReviewsSection = ({
           <div className="mt-3 flex items-center justify-center gap-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
-              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"
+              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 cursor-pointer disabled:opacity-50"
               disabled={page <= 1}
             >
               Prev
@@ -265,7 +271,7 @@ const ReviewsSection = ({
             </span>
             <button
               onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"
+              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 cursor-pointer disabled:opacity-50"
               disabled={page >= pageCount}
             >
               Next

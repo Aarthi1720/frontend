@@ -55,11 +55,10 @@ const RoomsTab = ({ hotelId }) => {
       </p>
 
       <div className="flex items-center mb-3">
-        {!hotelId && <p className="text-gray-500">Enter a Hotel ID above.</p>}
         <button
           onClick={() => setShowForm((v) => !v)}
           disabled={!hotelId}
-          className={`ml-auto px-4 py-1 rounded ${
+          className={`ml-auto px-4 py-1 rounded cursor-pointer ${
             hotelId
               ? "bg-[#0D9488] text-white hover:bg-[#0f766e]"
               : "bg-gray-300 text-gray-600 cursor-not-allowed"
@@ -86,11 +85,11 @@ const RoomsTab = ({ hotelId }) => {
       )}
 
       <div className="bg-white p-4 rounded shadow-md">
-        {loading && <p className="text-gray-600">Loading rooms…</p>}
-        {!loading && rooms.length === 0 && (
+        {loading ? (
+          <p className="text-gray-600">Loading rooms…</p>
+        ) : rooms.length === 0 ? (
           <p className="text-gray-500">No rooms found.</p>
-        )}
-        {!loading &&
+        ) : (
           rooms.map((r) => (
             <div
               key={r._id}
@@ -119,12 +118,13 @@ const RoomsTab = ({ hotelId }) => {
 
               <button
                 onClick={() => handleDelete(r._id)}
-                className="text-sm text-red-500 mt-2 sm:mt-0"
+                className="text-sm text-red-500 mt-2 sm:mt-0 cursor-pointer"
               >
                 <TrashIcon className="w-5 h-5" />
               </button>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

@@ -137,7 +137,7 @@ const AvailabilityBar = ({ hotelId, initialCalendar, roomsAvailability }) => {
               setStartDate(e.target.value);
               setSummary(null);
             }}
-            className="border-2 border-gray-400 caret-[#0D9488]  focus:outline-none rounded px-3 py-2 text-sm text-gray-700"
+            className="border-2 border-gray-400 caret-[#0D9488] cursor-pointer  focus:outline-none rounded px-3 py-2 text-sm text-gray-700"
           />
         </div>
         <div className="flex flex-col">
@@ -150,7 +150,7 @@ const AvailabilityBar = ({ hotelId, initialCalendar, roomsAvailability }) => {
               setEndDate(e.target.value);
               setSummary(null);
             }}
-            className="border-2 border-gray-400 caret-[#0D9488]  focus:outline-none rounded px-3 py-2 text-sm text-gray-700"
+            className="border-2 border-gray-400 caret-[#0D9488] cursor-pointer focus:outline-none rounded px-3 py-2 text-sm text-gray-700"
           />
         </div>
         <div className="flex flex-col">
@@ -166,12 +166,12 @@ const AvailabilityBar = ({ hotelId, initialCalendar, roomsAvailability }) => {
         <button
           onClick={check}
           disabled={loading || !hasRange || !guests}
-          className="bg-gradient-to-br from-[#0D9488] to-[#68b4ad] hover:bg-gradient-to-tl active:scale-105 text-white text-sm font-medium px-4 py-2 rounded transition duration-400 "
+          className="bg-gradient-to-br from-[#0D9488] to-[#68b4ad] hover:bg-gradient-to-tl active:scale-105 text-white text-sm font-medium px-4 py-2 rounded cursor-pointer transition duration-400 "
         >
           {loading ? "Checking…" : "Check Availability"}
         </button>
         {summary && (
-          <div className="text-sm text-gray-600 md:ml-auto">
+          <div className="text-sm text-gray-600 md:ml-auto cursor-pointer">
             <span className="font-semibold text-[#FB7185]">{summary.available}</span> of{" "}
             {summary.total} rooms available
           </div>
@@ -218,7 +218,7 @@ const AvailabilityBar = ({ hotelId, initialCalendar, roomsAvailability }) => {
               <button
                 key={tile.key}
                 onClick={() => onDayClick(tile.date)}
-                className={`rounded py-1 ${
+                className={`rounded py-1 cursor-pointer ${
                   rangeFlags.isInRange(tile.date) ||
                   rangeFlags.isStart(tile.date) ||
                   rangeFlags.isEnd(tile.date)

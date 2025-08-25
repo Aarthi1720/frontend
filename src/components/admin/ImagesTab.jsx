@@ -77,11 +77,11 @@ export default function ImagesTab({ hotelId }) {
     }
   };
 
-  if (loading) return <p>Loading hotel images...</p>;
+  if (loading) return <p className="text-gray-500">Loading hotel images...</p>;
 
   if (!hotelId || hotelId.length !== 24) {
     return (
-      <p className="text-red-600">⚠️ Please enter a valid Hotel ID above.</p>
+      <p className="text-red-600">⚠️ Please enter a Hotel ID above.</p>
     );
   }
 
@@ -96,7 +96,7 @@ export default function ImagesTab({ hotelId }) {
       <button
         type="submit"
         disabled={uploading || !files.length}
-        className="px-4 py-2 rounded text-white transition disabled:bg-gray-300 disabled:cursor-not-allowed"
+        className="px-4 py-2 rounded text-white transition disabled:bg-gray-300 cursor-pointer disabled:cursor-not-allowed"
         style={{
           backgroundColor: uploading || !files.length ? "#ccc" : "#0D9488",
           ...(uploading || !files.length

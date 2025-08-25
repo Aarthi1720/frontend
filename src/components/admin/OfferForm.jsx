@@ -52,7 +52,7 @@ export default function OfferForm({ hotelId, onCreated }) {
   };
   const today = new Date().toISOString().split("T")[0];
   return (
-    <>
+    <div className="">
       <form
         onSubmit={submit}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 mb-4"
@@ -135,7 +135,7 @@ export default function OfferForm({ hotelId, onCreated }) {
         <button
           type="submit"
           disabled={isIncomplete}
-          className={`px-4 py-2 rounded font-medium text-white transition ${
+          className={`px-4 py-2 rounded font-medium text-white cursor-pointer transition ${
             isIncomplete
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-[#0D9488] hover:bg-[#0f766e]"
@@ -146,7 +146,7 @@ export default function OfferForm({ hotelId, onCreated }) {
       </form>
 
       {/* Preview Card */}
-      <div className="bg-white border rounded p-4 shadow-sm max-w-md">
+      <div className="bg-white border-2 border-gray-300 rounded p-4 shadow-sm max-w-md">
         <h3 className="text-lg font-semibold text-[#0D9488] mb-1">
           {form.code || "OFFERCODE"}
         </h3>
@@ -157,15 +157,12 @@ export default function OfferForm({ hotelId, onCreated }) {
           Valid from <strong>{form.validFrom || "—"}</strong> to{" "}
           <strong>{form.validTo || "—"}</strong>
         </p>
-        <p className="text-xs text-gray-500">
-          Max redemptions: <strong>{form.maxRedemptions}</strong>
-        </p>
         {form.description && (
           <p className="text-xs text-gray-500 mt-1 italic">
             {form.description}
           </p>
         )}
       </div>
-    </>
+    </div>
   );
 }

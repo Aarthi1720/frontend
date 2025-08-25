@@ -315,7 +315,7 @@ const BookingDetail = () => {
             <button
               onClick={handleCancel}
               disabled={btnLoading.cancel}
-              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-60"
+              className="px-4 py-2 bg-gradient-to-br from-[#e94b3d] to-[#f0517e] hover:bg-gradient-to-tl cursor-pointer hover:scale-105 active:scale-90 text-white rounded  disabled:opacity-60"
             >
               {btnLoading.cancel ? "Cancelling…" : "Cancel Booking"}
             </button>
@@ -325,14 +325,14 @@ const BookingDetail = () => {
               <button
                 onClick={handleResendInvoice}
                 disabled={btnLoading.resend}
-                className="px-4 py-2 bg-[#F7882F] text-white rounded hover:bg-[#e07b29] disabled:opacity-60"
+                className="px-4 py-2 bg-gradient-to-br from-[#5e39e2] to-[#a794ee] hover:bg-gradient-to-tl cursor-pointer hover:scale-105 active:scale-90 text-white rounded disabled:opacity-60"
               >
                 {btnLoading.resend ? "Sending…" : "Resend Invoice"}
               </button>
               <button
                 onClick={handleDownloadInvoice}
                 disabled={btnLoading.pdf}
-                className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 disabled:opacity-60"
+                className="px-4 py-2 bg-gradient-to-br from-[#05622b] to-[#7ccd9e] hover:bg-gradient-to-tl cursor-pointer hover:scale-105 active:scale-90 text-white rounded disabled:opacity-60"
               >
                 {btnLoading.pdf ? "Preparing PDF…" : "Download Invoice"}
               </button>

@@ -75,7 +75,7 @@ export default function AnalyticsTab() {
             load({ silent: true });
           }}
           disabled={refreshing}
-          className={`px-3 py-1 rounded text-sm text-white ${
+          className={`px-3 py-1 rounded text-sm text-white cursor-pointer ${
             refreshing
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-[#0D9488] hover:bg-[#0f766e]"

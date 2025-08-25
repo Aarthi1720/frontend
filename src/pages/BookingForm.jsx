@@ -6,13 +6,9 @@ import StripeCheckoutWrapper from "../components/StripeCheckoutWrapper";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
 import {
-  Calendar,
-  CalendarCogIcon,
-  CalendarFoldIcon,
   Coins,
   LucideCalendarRange,
-  PartyPopperIcon,
-  Sparkle,
+  PartyPopper,
   Users,
 } from "lucide-react";
 
@@ -368,7 +364,7 @@ const BookingForm = () => {
             <div className="bg-[#b5eae7] text-gray-700 rounded-lg p-2 text-sm space-y-1">
               <p className="font-semibold flex gap-2 ml-2">
                 Available Offers
-                <PartyPopperIcon className="w-5 h-5" />
+                <PartyPopper className="w-5 h-5" />
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 {availableOffers.map((o) => {

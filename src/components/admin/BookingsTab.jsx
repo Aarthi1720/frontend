@@ -285,7 +285,7 @@ const BookingsTab = () => {
         </select>
         <button
           onClick={handleExportCSV}
-          className="bg-[#0D9488] hover:bg-[#0F766E] text-white px-4 py-2 rounded-md transition"
+          className="bg-[#0D9488] hover:bg-[#0F766E] text-white px-4 py-2 rounded-md transition cursor-pointer"
         >
           Export CSV
         </button>
@@ -295,7 +295,7 @@ const BookingsTab = () => {
             type="checkbox"
             checked={adminActionsEnabled}
             onChange={(e) => setAdminActionsEnabled(e.target.checked)}
-            className="w-4 h-4 accent-[#0D9488]"
+            className="w-4 h-4 accent-[#0D9488] cursor-pointer"
           />
           <span>Enable admin actions</span>
         </label>
@@ -363,7 +363,7 @@ const BookingsTab = () => {
                         : toast("Enable admin actions to proceed.")
                     }
                     disabled={!canCancel || !adminActionsEnabled}
-                    className={`px-3 py-1 rounded ${
+                    className={`px-3 py-1 rounded cursor-pointer ${
                       canCancel && adminActionsEnabled
                         ? "bg-red-500 text-white"
                         : "bg-gray-200 text-gray-500 cursor-not-allowed"
@@ -379,7 +379,7 @@ const BookingsTab = () => {
                         : toast("Enable admin actions to proceed.")
                     }
                     disabled={!canResend || !adminActionsEnabled}
-                    className={`px-3 py-1 rounded-md text-sm ${
+                    className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
                       canResend && adminActionsEnabled
                         ? "bg-blue-400 text-white hover:bg-sky-600"
                         : "bg-gray-200 text-gray-500 cursor-not-allowed"
@@ -400,7 +400,7 @@ const BookingsTab = () => {
                       b.status === "cancelled" ||
                       b.status === "completed"
                     }
-                    className={`px-3 py-1 rounded-md text-sm ${
+                    className={`px-3 py-1 rounded-md text-sm cursor-pointer ${
                       adminActionsEnabled &&
                       b.paymentStatus === "paid" &&
                       b.status !== "cancelled" &&
@@ -419,7 +419,7 @@ const BookingsTab = () => {
                         : toast("Enable admin actions to proceed.")
                     }
                     disabled={!isActionable || !adminActionsEnabled}
-                    className={`px-3 py-1 rounded ${
+                    className={`px-3 py-1 rounded cursor-pointer ${
                       isActionable && adminActionsEnabled
                         ? "bg-green-600 text-white"
                         : "bg-gray-200 text-gray-500 cursor-not-allowed"

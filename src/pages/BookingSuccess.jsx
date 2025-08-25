@@ -110,26 +110,30 @@ const BookingSuccess = () => {
       ? "🎉 Booking Confirmed!"
       : "⏳ Booking Created";
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-[#ccfbf1] to-[#fce7f3] p-6 flex justify-center items-center px-4">
-      <div className="w-full bg-white rounded-2xl shadow-lg p-5 md:p-8 space-y-6">
-        {/* Success Header */}
-        <div className="text-center">
-          <CheckCircle2 className="mx-auto text-[#0D9488] w-16 h-16" />
-          <h1 className="text-2xl font-bold text-[#0D9488] mt-3">{heading}</h1>
-          <p className="text-gray-600 text-sm mt-1">
-            Your stay at{" "}
-            <span className="font-semibold">
-              {booking.hotel?.name || "Hotel"}
-            </span>{" "}
-            {booking.paymentStatus === "paid"
-              ? "is booked"
-              : "is created (awaiting payment)"}
-          </p>
-        </div>
+return (
+  <div className="bg-gradient-to-tr from-[#ccfbf1] to-[#fce7f3] px-4 py-8">
+    <div className="w-full max-w-3xl md:max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-5 md:p-8 space-y-6">
+      {/* Success Header */}
+      <div className="text-center">
+        <CheckCircle2 className="mx-auto text-[#0D9488] w-16 h-16" />
+        <h1 className="text-3xl md:text-4xl font-bold text-[#0D9488] mt-3">
+          {heading}
+        </h1>
+        <p className="text-gray-600 text-sm mt-1">
+          Your stay at{" "}
+          <span className="font-semibold">
+            {booking.hotel?.name || "Hotel"}
+          </span>{" "}
+          {booking.paymentStatus === "paid"
+            ? "is booked"
+            : "is created (awaiting payment)"}
+        </p>
+      </div>
 
-        {/* Booking Summary */}
-        <div className="border border-[#E5E7EB] rounded-xl p-4 bg-white space-y-2">
+      {/* Info Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Booking Summary (full width) */}
+        <div className="md:col-span-2 border border-[#E5E7EB] rounded-xl p-4 bg-white space-y-2">
           <h2 className="text-lg font-semibold text-[#0D9488] mb-2">
             Booking Summary
           </h2>
@@ -139,11 +143,17 @@ const BookingSuccess = () => {
           </p>
           <p className="text-sm text-gray-700">
             <Hotel className="inline mr-2 w-4 h-4 text-[#0D9488]" />
-            Hotel: {booking.hotel?.name || "Unknown Hotel"}
+            Hotel:{" "}
+            <span className="inline-block max-w-[18rem] truncate align-bottom">
+              {booking.hotel?.name || "Unknown Hotel"}
+            </span>
           </p>
           <p className="text-sm text-gray-700">
             <Bed className="inline mr-2 w-4 h-4 text-[#0D9488]" />
-            Room: {booking.room?.name || "N/A"}
+            Room:{" "}
+            <span className="inline-block max-w-[18rem] truncate align-bottom">
+              {booking.room?.name || "N/A"}
+            </span>
           </p>
           <p className="text-sm text-gray-700">
             <Calendar className="inline mr-2 w-4 h-4 text-[#0D9488]" />
@@ -170,7 +180,11 @@ const BookingSuccess = () => {
           <p className="text-lg font-semibold text-gray-900 mt-2">
             Total Paid: ₹{totalPaid}
           </p>
-          <div className="flex justify-between items-center text-sm mt-2">
+          <div
+            className="flex justify-between items-center text-sm mt-2"
+            role="status"
+            aria-live="polite"
+          >
             <span>Status</span>
             <StatusBadge status={booking.paymentStatus} />
           </div>
@@ -201,8 +215,8 @@ const BookingSuccess = () => {
           )}
         </div>
 
-        {/* Emergency Contact */}
-        <div className="border border-[#E5E7EB] rounded-xl p-4 bg-white">
+        {/* Emergency Contact (full width) */}
+        <div className="md:col-span-2 border border-[#E5E7EB] rounded-xl p-4 bg-white">
           <h2 className="text-lg font-semibold text-[#0D9488] mb-2">
             Emergency Contact
           </h2>
@@ -212,37 +226,38 @@ const BookingSuccess = () => {
             {booking.emergencyContactSnapshot?.phone || "N/A"}
           </p>
         </div>
+      </div>
 
-        {/* Footer Note */}
-        <p className="text-center text-gray-500 text-sm">
-          A confirmation email has been sent to{" "}
-          <strong>{booking.user?.email || "your email"}</strong>
-        </p>
+      {/* Footer Note */}
+      <p className="text-center text-gray-500 text-sm">
+        A confirmation email has been sent to{" "}
+        <strong>{booking.user?.email || "your email"}</strong>
+      </p>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center md:justify-end gap-4 mt-4">
-          <Link
-            to="/my-bookings"
-            className="px-2 md:px-4 py-2 bg-[#0D9488] text-white rounded-lg hover:bg-[#0f766e] transition"
-          >
-            View My Bookings
-          </Link>
-          <Link
-            to="/"
-            className="px-2 md:px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
-          >
-            Back to Home
-          </Link>
-        </div>
+      {/* Action Buttons */}
+      <div className="flex flex-wrap justify-center md:justify-end gap-4 mt-4">
+        <Link
+          to="/my-bookings"
+          className="px-2 md:px-4 py-2 bg-[#0D9488] text-white rounded-lg hover:bg-[#0f766e] transition"
+        >
+          View My Bookings
+        </Link>
+        <Link
+          to="/"
+          className="px-2 md:px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+        >
+          Back to Home
+        </Link>
+      </div>
 
-        {/* Info Banner */}
-        <div className="mt-4 p-3 bg-[#E0F2F1] border border-[#B2DFDB] rounded-lg text-center text-sm text-[#00695C]">
-          You’ll be able to write a review after your stay. We’ll send a
-          reminder 🙂
-        </div>
+      {/* Info Banner */}
+      <div className="mt-4 p-3 bg-[#E0F2F1] border border-[#B2DFDB] rounded-lg text-center text-sm text-[#00695C]">
+        You’ll be able to write a review after your stay. We’ll send a reminder 🎗️
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default BookingSuccess;

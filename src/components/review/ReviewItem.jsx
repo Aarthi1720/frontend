@@ -1,6 +1,6 @@
 import React from "react";
 import StarRating from "./StarRating";
-import { Edit, Edit2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 
 const relTime = (iso) => {
   try {
@@ -77,16 +77,18 @@ const ReviewItem = ({ review, canEdit = false, onEdit, onDelete }) => {
         {canEdit && (
           <div className="flex gap-3 text-sm text-right">
             <button
-              className="text-[#0D9488] hover:underline font-medium"
+              className="text-[#0D9488] hover:underline font-medium cursor-pointer"
               onClick={() => onEdit?.(review)}
+              ria-label="Edit review"
             >
               <Edit className="w-4 h-4" />
             </button>
             <button
               className="text-[#FB7185] hover:underline font-medium"
               onClick={() => onDelete?.(review)}
+              aria-label="Delete review"
             >
-              <Edit2 className="w-4 h-4" />
+              <Trash2 className="w-4 h-4" />
             </button>
           </div>
         )}

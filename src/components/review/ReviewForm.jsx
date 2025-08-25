@@ -32,13 +32,17 @@ const ReviewForm = ({ hotelId, roomId, existing, onSaved, onCancel }) => {
 
   const user = (() => {
     try {
-      return JSON.parse(localStorage.getItem("user") || sessionStorage.getItem("user"));
+      return JSON.parse(
+        localStorage.getItem("user") || sessionStorage.getItem("user")
+      );
     } catch {
       return null;
     }
   })();
 
-  if (!user?._id) {
+  const userId = user?._id || user?.id;
+
+  if (!userId) {
     return (
       <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm">
         Please log in to write a review.
@@ -125,7 +129,7 @@ const ReviewForm = ({ hotelId, roomId, existing, onSaved, onCancel }) => {
         <button
           type="submit"
           disabled={submitting || tooShort || noRating || (existing && noChange)}
-          className="px-5 py-2 rounded-md text-white text-sm font-medium disabled:opacity-60 bg-gradient-to-br from-[#0D9488] to-[#68b4ad] hover:bg-gradient-to-tl active:scale-105 transition duration-400"
+          className="px-5 py-2 rounded-md text-white text-sm font-medium cursor-pointer disabled:opacity-60 bg-gradient-to-br from-[#0D9488] to-[#68b4ad] hover:bg-gradient-to-tl active:scale-105 transition duration-400"
         >
           {submitting
             ? "Saving…"
@@ -137,7 +141,7 @@ const ReviewForm = ({ hotelId, roomId, existing, onSaved, onCancel }) => {
           <button
             type="button"
             onClick={() => onCancel?.()}
-            className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md"
+            className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md cursor-pointer"
           >
             Cancel
           </button>

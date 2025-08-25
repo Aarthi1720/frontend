@@ -152,14 +152,14 @@ export default function PendingVerificationsTab() {
                       <button
                         onClick={() => requestAction(user._id, "approve")}
                         disabled={isDisabled}
-                        className="px-2 py-1 bg-green-600 text-white rounded text-xs disabled:opacity-50 hover:bg-green-700 transition"
+                        className="px-2 py-1 bg-green-600 text-white rounded text-xs disabled:opacity-50 hover:bg-green-700 transition cursor-pointer"
                       >
                         Approve
                       </button>
                       <button
                         onClick={() => requestAction(user._id, "reject")}
                         disabled={isDisabled}
-                        className="px-2 py-1 bg-rose-500 text-white rounded text-xs disabled:opacity-50 hover:bg-rose-600 transition"
+                        className="px-2 py-1 bg-rose-500 text-white rounded text-xs disabled:opacity-50 hover:bg-rose-600 transition cursor-pointer"
                       >
                         Reject
                       </button>

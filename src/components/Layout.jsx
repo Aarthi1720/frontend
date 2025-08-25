@@ -4,13 +4,29 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AdminNavbar from "./AdminNavbar";
 
+// tiny helper: read role from localStorage safely
+function getStoredUserRole() {
+  try {
+    const raw = localStorage.getItem("user");
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed?.role || null;
+  } catch {
+    return null;
+  }
+}
+
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminPath = location.pathname.startsWith("/admin");
+  const role = getStoredUserRole();
+  const isAdmin = role === "admin";
 
-  // These routes should not be constrained by max-width
-  const fullScreenRoutes = [
-    "/",
+  // Only show AdminNavbar if path is /admin* AND stored role is admin
+  const showAdminNav = isAdminPath && isAdmin;
+
+  // Routes that should be full-width (no max container)
+  const fullScreenPrefixes = [
     "/login",
     "/register",
     "/forgot-password",
@@ -18,17 +34,17 @@ const Layout = ({ children }) => {
     "/reset-password",
     "/profile",
     "/favorites",
-    "/hotels",
-    "/hotels/:id",
-    "/booking-success/:bookingId",
-    "/booking/:hotelId/:roomId",
-    "/my-bookings",
+    "/hotels",   // includes /hotels and /hotels/:id
+    "/booking/", // booking flow pages
   ];
-  const isFullScreen = fullScreenRoutes.includes(location.pathname);
+  const isHome = location.pathname === "/";
+  const isFullScreen =
+    isHome || fullScreenPrefixes.some((p) => location.pathname.startsWith(p));
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F9FAFB]">
-      {isAdminRoute ? <AdminNavbar /> : <Navbar />}
+      {showAdminNav ? <AdminNavbar /> : <Navbar />}
+
       <main
         className={[
           "flex-grow",
@@ -36,7 +52,7 @@ const Layout = ({ children }) => {
             ? "w-full"
             : "w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-screen-xl",
           "pt-16",
-          isAdminRoute
+          showAdminNav
             ? "pb-6"
             : "pb-[calc(env(safe-area-inset-bottom)+64px)] md:pb-8",
         ].join(" ")}
@@ -44,7 +60,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      {!isAdminRoute && <Footer />}
+      {!showAdminNav && <Footer />}
     </div>
   );
 };

@@ -18,8 +18,8 @@ const Navbar = () => {
   const { user, ready, setUser } = useContext(AuthContext);
 
   const token = localStorage.getItem("token");
-  const isLoggedIn = Boolean(token);
-  const isAdmin = user?.role === "admin";
+  const isLoggedIn = Boolean(token) && Boolean(user);
+  const isAdmin = isLoggedIn && user?.role === "admin";
 
   const updateFavCount = useCallback(async () => {
     if (!isLoggedIn) return;
@@ -42,10 +42,11 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    delete api.defaults.headers.common.Authorization;
+    // clear axios header safely
+    try { delete api.defaults.headers.common.Authorization; } catch {}
     setUser(null);
     toast.success("Logged out");
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   const activeColor = "text-[#0D9488]";
@@ -101,7 +102,7 @@ const Navbar = () => {
               {
                 to: "/admin/dashboard",
                 label: "Admin Panel",
-                condition: isAdmin && ready,
+                condition: isAdmin,
               },
             ]
               .filter((link) => link.condition !== false)
@@ -165,7 +166,7 @@ const Navbar = () => {
                 to: "/admin/dashboard",
                 icon: ToolCase,
                 label: "Admin",
-                condition: isAdmin && ready,
+                condition: isAdmin,
               },
             ]
               .filter((link) => link.condition !== false)
@@ -191,7 +192,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className={`text-[#FB7185] text-sm flex flex-col items-center ${focusRing}`}
+                className={`text-[#FB7185] text-sm flex flex-col items-center cursor-pointer ${focusRing}`}
                 aria-label="Logout"
               >
                 <LogOut size={20} />
@@ -200,7 +201,7 @@ const Navbar = () => {
             ) : (
               <NavLink
                 to="/login"
-                className={`text-[#6B7280] text-sm flex flex-col items-center ${focusRing}`}
+                className={`text-[#6B7280] text-sm flex flex-col items-center cursor-pointer ${focusRing}`}
                 aria-label="Login"
               >
                 <User size={20} />

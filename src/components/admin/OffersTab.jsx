@@ -40,7 +40,7 @@ const OffersTab = ({ hotelId }) => {
 
   if (!hotelId) {
     return (
-      <p className="text-red-600">⚠️ Please enter a valid Hotel ID above.</p>
+      <p className="text-red-600">⚠️ Please enter a Hotel ID above.</p>
     );
   }
 

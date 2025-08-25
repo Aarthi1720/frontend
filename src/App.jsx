@@ -24,12 +24,18 @@ import NotFound from "./pages/NotFound";
 import VerifyOtp from "./pages/VerifyOtp";
 import AdminRoute from "./routes/AdminRoute";
 
-
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
       <Layout>
-        <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+        <Toaster
+          position="top-center"
+          gutter={8}
+          toastOptions={{
+            duration: 3000,
+            style: { marginTop: "4rem" },
+          }}
+        />
 
         <Routes>
           <Route path="/" element={<Home />} />

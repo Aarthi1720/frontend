@@ -125,7 +125,7 @@ export default function AdminNavbar() {
             </Link>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold text-[#FB7185] hover:text-[#E11D48]"
+              className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold text-[#FB7185] cursor-pointer hover:text-[#E11D48]"
             >
               <LogOut size={16} /> Logout
             </button>

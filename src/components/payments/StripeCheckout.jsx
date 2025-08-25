@@ -75,40 +75,6 @@ const StripeCheckout = ({ bookingId, onSuccess, amount }) => {
     );
   }
 
-  // return (
-  //   <div className="bg-white p-4 rounded shadow-md relative">
-  //     {errorMessage && (
-  //       <Modal
-  //         title="Payment Error"
-  //         message={errorMessage}
-  //         onClose={() => setErrorMessage("")}
-  //       />
-  //     )}
-
-  //     <PaymentElement />
-
-  //     <button
-  //       onClick={handlePayment}
-  //       disabled={submitting || !amount}
-  //       className="bg-green-600 text-white px-4 py-2 rounded mt-4 w-full disabled:opacity-50 flex items-center justify-center"
-  //     >
-  //       {submitting ? (
-  //         <>
-  //           <Spinner size="sm" className="mr-2" /> Processing…
-  //         </>
-  //       ) : (
-  //         `Pay ₹${(amount / 100).toFixed(2)}`
-  //       )}
-  //     </button>
-
-  //     {submitting && (
-  //       <div className="absolute inset-0 bg-white/50 flex items-center justify-center rounded">
-  //         <Spinner />
-  //       </div>
-  //     )}
-  //   </div>
-  // );
-
   return (
   <div className="bg-white p-6 rounded-lg shadow-md relative max-w-md mx-auto">
     {errorMessage && (
@@ -124,7 +90,7 @@ const StripeCheckout = ({ bookingId, onSuccess, amount }) => {
     <button
       onClick={handlePayment}
       disabled={submitting || !amount}
-      className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium text-white transition
+      className="mt-6 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium text-white transition cursor-pointer
                  disabled:opacity-50 disabled:cursor-not-allowed
                  bg-[#0D9488] hover:bg-[#0f766e]"
     >

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReviewForm from "./ReviewForm";
 
 const ReviewModal = ({
   open,
@@ -22,15 +23,17 @@ const ReviewModal = ({
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-6">
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-6" 
+      onClick={(e) => e.stopPropagation()}  // ✅ don’t close when clicking inside
+      >
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold">
             {existing ? "Edit Review" : "Write a Review"}
           </h3>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl leading-none"
+            className="text-gray-500 hover:text-gray-700 text-2xl leading-none cursor-pointer"
             aria-label="Close"
           >
             &times;
@@ -41,7 +44,7 @@ const ReviewModal = ({
           roomId={roomId}
           existing={existing || null}
           onSaved={() => {
-            onRatingChanged?.();
+            onRatingChanged?.(); 
             onClose?.();
           }}
           onCancel={() => onClose?.()}

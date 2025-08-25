@@ -163,7 +163,7 @@ const RoomForm = ({ hotelId, onCreated }) => {
       <button
         onClick={handleSubmit}
         disabled={submitting}
-        className="bg-[#0D9488] hover:bg-[#0f766e] text-white px-4 py-2 rounded w-full mt-4 transition"
+        className="bg-[#0D9488] hover:bg-[#0f766e] text-white px-4 py-2 rounded w-full mt-4 transition cursor-pointer"
       >
         {submitting ? "Creating…" : "Create Room"}
       </button>

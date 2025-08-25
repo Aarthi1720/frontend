@@ -1,95 +1,79 @@
-# 🌐 Hotel Booking System – Frontend
+# 🏨 CasaStay – Hotel Booking System (Frontend)
 
-This is the **frontend** of the Hotel Booking System – a modern, responsive platform for booking hotel rooms, viewing availability, applying offers, and writing reviews. Built with **React + TailwindCSS**, it integrates seamlessly with the backend API.
-
----
-
-## ✨ Features
-
-### 🔍 Hotel Search & Filtering
-- Search hotels by **location**
-- Filter by **guests** and **dates**
-- Home page includes a **featured hotels carousel**
-
-### 🛏️ Room Details & Availability
-- See room images, pricing, amenities
-- Check real-time room availability by date
-- View capacity and description
-
-### 📅 Booking System
-- Book rooms with check-in/out, guests, special requests
-- Integrated with **payment gateway**
-- Booking form with client-side validations
-
-### 💳 Payment Integration
-- Accepts **credit/debit cards** or **wallets**
-- Confirms booking only after successful payment
-
-### 🧾 Booking History
-- View **upcoming** and **past bookings**
-- Download receipts
-- View booking status and details
-
-### ⭐ Reviews & Ratings
-- Leave reviews only after completed **paid stays**
-- Ratings with star-based system (1 to 5)
-- Comments with admin moderation
-- Verified badges for guests
-
-### 🎁 Offers & Discounts
-- View active offers (home & during booking)
-- Apply **discount codes**
-- Supports **flat** or **percentage** offers with conditions
-
-### 🪪 ID Verification (KYC)
-- Upload Aadhar card photo for verification
-- Admins approve or reject manually
-- Profile shows verification status
-
-### 🎖 Loyalty Coins
-- Earn coins for bookings over ₹1000
-- Displayed in the profile page
+Welcome to the **CasaStay Hotel Booking System Frontend** 🎉 – a modern web application built with **React + Vite + TailwindCSS** to deliver a seamless hotel booking experience with rich UI/UX enhancements.
 
 ---
 
-## 🧑‍💻 Tech Stack
+## ✨ Features (User-Facing)
 
-| Layer          | Tech                    |
-|----------------|-------------------------|
-| Frontend       | React (Vite)            |
-| Styling        | Tailwind CSS            |
-| Routing        | React Router            |
-| State          | Context API             |
-| API Calls      | Axios                   |
-| Notifications  | React Hot Toast         |
-| Carousel       | Swiper.js               |
-
----
-
-## 📁 Folder Structure
-
-frontend/
-├── assets/ # Static assets (images, bg)
-├── components/ # Reusable components
-├── context/ # Auth context
-├── lib/ # Axios config
-├── pages/ # Page components
-├── App.jsx # Main app logic
-├── main.jsx # App root
-├── index.css
-├── .env
+- 🔎 **Search & Filtering** – Find hotels by location, price, amenities, and room type.  
+- 🏨 **Hotel & Room Details** – Images, descriptions, amenities, bed type, views, capacity.  
+- 📅 **Availability Calendar** – Check room availability instantly for selected dates.  
+- 🛏️ **Room Booking Flow** – Select dates, guests, special requests, and confirm booking.  
+- 💳 **Stripe Payment Integration** – Secure card payments & digital wallets.  
+- 🎁 **Special Offers** – Apply promo codes & discounts during checkout.  
+- 🪙 **Loyalty Coins** – Earn coins for bookings above ₹1000.  
+- 💬 **Reviews & Ratings** – Only verified guests can submit reviews after stays.  
+- 👤 **User Profiles** – Manage personal info, view booking history, and saved favorites.  
+- 📧 **Notifications** – Booking confirmations & reminders.  
+- 📱 **Responsive UI** – Mobile-first, fully optimized with TailwindCSS.  
 
 ---
 
-## 🔐 Admin Login (Demo)
+## 🛠️ Tech Stack
 
-To access the admin panel:
-
-- **Email:** sweetaarthi1705@gmail.com 
-- **Password:** 123456
+- ⚛️ **React 18 + Vite** – Fast and modern React setup.  
+- 🎨 **TailwindCSS** – Utility-first responsive design.  
+- 🔐 **React Router** – Routing and protected routes.  
+- 🍞 **React Hot Toast** – Notifications (smart positioning so it doesn’t overlap navbar).  
+- 📦 **Axios** – API communication.  
+- 🗂 **React Context API** – State management (no Redux needed).  
 
 ---
 
-## 📸 Screenshot
+## 🚀 Enhancements / Add-ons
+
+- 🌈 Gradient layouts, modern modals with outside click-to-close.  
+- 📊 Booking success page redesigned with summaries & loyalty rewards.  
+- 🛡️ Conditional rendering of review forms (only verified users after paid stay).  
+- 🧭 Admin panel excluded from user navbar after logout.  
+- 📱 Mobile bottom navigation for user & admin flows.  
+- 🖼️ Placeholder “No offers / No reviews” messages to avoid user confusion.  
+
+---
+
+## ⚡ Getting Started
+
+```bash
+# clone repo
+git clone https://github.com/Aarthi1720/frontend
+cd casastay-frontend
+
+# install dependencies
+npm install
+
+# run locally
+npm run dev
+
+# build for production
+npm run build
+```
+
+---
+
+## 🔗  Environment Variables
+
+Create a `.env` file with:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+VITE_STATIC_URL=http://localhost:5000/
+VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+
+```
+
+## 📸 Screenshots
 
 ![alt text](image.png)
+
+---
