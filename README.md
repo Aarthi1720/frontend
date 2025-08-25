@@ -8,7 +8,7 @@ This is the **frontend** of the Hotel Booking System – a modern, responsive pl
 
 ### 🔍 Hotel Search & Filtering
 - Search hotels by **location**
-- Filter by **amenities**, **guests**, **dates**
+- Filter by **guests** and **dates**
 - Home page includes a **featured hotels carousel**
 
 ### 🛏️ Room Details & Availability
