@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* Prevent sideways scroll everywhere */
+html,
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: transparent; /* Let gradient show through */
+}
+
+/* Use “small viewport” units to handle mobile URL bar changes */
+body {
+  min-height: 100svh;
+  background: #f9fafb;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Make root stretch so fixed bars overlay correctly */
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional: smoother scroll & tap */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
