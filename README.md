@@ -78,3 +78,18 @@ frontend/
 ├── main.jsx # App root
 ├── index.css
 ├── .env
+
+---
+
+## 🔐 Admin Login (Demo)
+
+To access the admin panel:
+
+- **Email:** sweetaarthi1705@gmail.com 
+- **Password:** 123456
+
+---
+
+## 📸 Screenshot
+
+![alt text](image.png)
