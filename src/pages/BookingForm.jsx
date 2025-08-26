@@ -5,12 +5,7 @@ import Spinner from "../components/common/Spinner";
 import StripeCheckoutWrapper from "../components/StripeCheckoutWrapper";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
-import {
-  Coins,
-  LucideCalendarRange,
-  PartyPopper,
-  Users,
-} from "lucide-react";
+import { Coins, LucideCalendarRange, PartyPopper, Users } from "lucide-react";
 
 const getCurrentUser = () => {
   try {
@@ -182,7 +177,14 @@ const BookingForm = () => {
         cartTotal: baseTotal,
         hotelId,
       });
-      setDiscount(res.data?.discount || 0);
+      const discount = res.data?.discount || 0;
+      setDiscount(discount);
+      // ✅ Show toast only if discount is applied
+      if (discount > 0) {
+        toast.success(`Offer applied! You saved ₹${discount}`);
+      } else {
+        toast("Promo code valid but no discount applied", { icon: "ℹ️" });
+      }
     } catch (err) {
       setDiscount(0);
       toast.error(err?.response?.data?.message || "Invalid or expired offer");
@@ -386,7 +388,7 @@ const BookingForm = () => {
           <button
             disabled={!offerCode.trim()}
             onClick={applyOffer}
-            className={`w-full py-2 rounded ${
+            className={`w-full py-2 rounded cursor-pointer ${
               offerCode.trim()
                 ? "bg-[#0D9488] text-white hover:bg-[#0f766e]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -447,7 +449,7 @@ const BookingForm = () => {
               !checkOut ||
               coinsToUse > coinBalance
             }
-            className={`w-full py-3 rounded text-white font-medium transition ${
+            className={`w-full py-3 rounded text-white font-medium cursor-pointer transition ${
               creating ||
               nights === 0 ||
               !checkIn ||

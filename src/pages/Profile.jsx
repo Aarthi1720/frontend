@@ -12,6 +12,7 @@ import {
   BookHeartIcon,
 } from "lucide-react";
 import Spinner from "../components/common/Spinner";
+import Loader from "../components/ui/Loader";
 
 const STATIC_URL = import.meta.env.VITE_STATIC_URL;
 
@@ -21,8 +22,8 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [file, setFile] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [hasChanges, setHasChanges] = useState(false);
   const [justSaved, setJustSaved] = useState(false);
+  const [deleting, setDeleting] = useState(false); // ✅ loader for delete
   const navigate = useNavigate();
   const fileInputRef = useRef();
 
@@ -39,10 +40,7 @@ const Profile = () => {
     load();
   }, []);
 
-  useEffect(() => {
-    if (!user) return;
-    setHasChanges(name !== (user.name || "") || !!file);
-  }, [name, file, user]);
+  const hasChanges = name !== (user?.name || "") || !!file;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +52,12 @@ const Profile = () => {
     try {
       const form = new FormData();
       form.append("name", name);
-      if (file) form.append("idVerification", file);
+
+      if (file) {
+        form.append("idVerification", file);
+        // ✅ reset verification to pending on new upload
+        form.append("forcePending", "true");
+      }
 
       const res = await api.put("/users/me", form);
       setLocalUser(res.data);
@@ -62,7 +65,6 @@ const Profile = () => {
       localStorage.setItem("user", JSON.stringify(res.data));
       toast.success("Profile updated");
       setFile(null);
-      setHasChanges(false);
       setJustSaved(true);
     } catch {
       toast.error("Update failed");
@@ -78,6 +80,7 @@ const Profile = () => {
   };
 
   const handleRemoveServerFile = async () => {
+    setDeleting(true);
     try {
       await api.delete("/users/me/id-verification");
       const updated = { ...user, idVerification: null };
@@ -87,6 +90,8 @@ const Profile = () => {
       toast.success("ID document removed from profile");
     } catch {
       toast.error("Failed to remove ID");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -96,8 +101,6 @@ const Profile = () => {
       state: { email: user.email, mode: "profile" },
     });
   };
-
-  // if (!user) return <p className="text-center p-4">Loading profile…</p>;
 
   if (!user) return <Spinner />;
 
@@ -149,6 +152,12 @@ const Profile = () => {
                 ID Verification
               </label>
 
+              {/* ⚠️ Banner for re-upload */}
+              <div className="mb-3 p-2 bg-yellow-50 border border-yellow-200 text-xs text-yellow-800 rounded">
+                ⚠️ Uploading a new ID will reset your verification to{" "}
+                <strong>pending</strong> until admin re-approves.
+              </div>
+
               {user.idVerification?.documentUrl && (
                 <div className="mb-3">
                   <img
@@ -163,9 +172,10 @@ const Profile = () => {
                   <button
                     type="button"
                     onClick={handleRemoveServerFile}
-                    className="text-red-600 text-xs mt-2 hover:underline"
+                    disabled={deleting}
+                    className="text-red-600 text-xs mt-2 hover:underline flex items-center gap-1"
                   >
-                    ❌ Remove from profile
+                    {deleting ? <Loader className="w-20" /> : "❌ Remove from profile"}
                   </button>
                 </div>
               )}
