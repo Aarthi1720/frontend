@@ -77,3 +77,20 @@ VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 ![alt text](image.png)
 
 ---
+
+## 🚀 Live Demo & Test Accounts
+
+**Frontend**: https://hotel-booking-frontend-beige.vercel.app/
+**Backend API** (read-only docs): https://hotel-booking-backend-ruqd.onrender.com/
+
+**Admin (demo)**
+- Email: sweetaarthi1705@gmail.com
+- Password: 123456
+
+**User (demo)**
+- Email: sweetaarthi1720@gmail.com
+- Password: 987654
+
+> These are demo accounts for evaluation on the hosted site only.
+
+---
