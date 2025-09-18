@@ -12,7 +12,8 @@ Welcome to the **CasaStay Hotel Booking System Frontend** 🎉 – a modern web 
 - 🛏️ **Room Booking Flow** – Select dates, guests, special requests, and confirm booking.  
 - 💳 **Stripe Payment Integration** – Secure card payments & digital wallets.  
 - 🎁 **Special Offers** – Apply promo codes & discounts during checkout.  
-- 🪙 **Loyalty Coins** – Earn coins for bookings above ₹1000.  
+- 🪙 **Loyalty Coins** – Earn coins for bookings above ₹1000.
+- ☑️ **ID verification** -  Handled ID verification (manual/AI/ocr).
 - 💬 **Reviews & Ratings** – Only verified guests can submit reviews after stays.  
 - 👤 **User Profiles** – Manage personal info, view booking history, and saved favorites.  
 - 📧 **Notifications** – Booking confirmations & reminders.  
